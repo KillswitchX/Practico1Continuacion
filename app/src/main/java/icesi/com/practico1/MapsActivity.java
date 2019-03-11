@@ -24,6 +24,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.maps.android.PolyUtil;
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -54,6 +56,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public Polygon polygonSecond;
 
     public Polygon polygonThird;
+
+    public LatLng ln;
 
 
     public LatLng oneB = new LatLng(3.341661, -76.529788);
@@ -136,7 +140,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onLocationChanged(Location location) {
                 lat = location.getLatitude();
                 lon = location.getLongitude();
-                LatLng ln = new LatLng(lat,lon);
+                ln = new LatLng(lat,lon);
 
 
                 if(first==false){
@@ -144,6 +148,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     marc = mMap.addMarker(actual);
                     //mMap.addMarker(actual);
                     first=true;
+
+
+                    if(PolyUtil.containsLocation(ln, polygonBiblio.getPoints(), true)){
+                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Biblio", Toast.LENGTH_LONG).show();
+                    }
+
+                    if(PolyUtil.containsLocation(ln, polygonSecond.getPoints(), true)){
+                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Second", Toast.LENGTH_LONG).show();
+                    }
+
+                    if(PolyUtil.containsLocation(ln, polygonThird.getPoints(), true)){
+                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Third", Toast.LENGTH_LONG).show();
+                    }
                 }
                 else{
 
@@ -156,6 +173,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(ln));
 
                     Toast.makeText(getApplicationContext(), "Ubicación actual actualizada", Toast.LENGTH_LONG).show();
+
+
+
+                    if(PolyUtil.containsLocation(ln, polygonBiblio.getPoints(), true)){
+                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Biblio", Toast.LENGTH_LONG).show();
+                    }
+
+                    if(PolyUtil.containsLocation(ln, polygonSecond.getPoints(), true)){
+                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Second", Toast.LENGTH_LONG).show();
+                    }
+
+
+                    if(PolyUtil.containsLocation(ln, polygonThird.getPoints(), true)){
+                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Third ms", Toast.LENGTH_LONG).show();
+                    }
 
                 }
 
@@ -203,17 +235,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         polygonBiblio = mMap.addPolygon(new PolygonOptions()
                 .add(oneB, twoB, threeB, fourB));
-        polygonBiblio.setStrokeColor(Color.RED);
+        polygonBiblio.setStrokeColor(Color.YELLOW);
 
 
 
         polygonSecond = mMap.addPolygon(new PolygonOptions()
                 .add(oneS, twoS, threeS, fourS));
-        polygonSecond.setStrokeColor(Color.BLUE);
+        polygonSecond.setStrokeColor(Color.GREEN);
 
         polygonThird = mMap.addPolygon(new PolygonOptions()
                 .add(oneT, twoT, threeT, fourT));
-        polygonBiblio.setStrokeColor(Color.GREEN);
+        polygonBiblio.setStrokeColor(Color.RED);
+
+
+
 
         //boolean inside =
 
