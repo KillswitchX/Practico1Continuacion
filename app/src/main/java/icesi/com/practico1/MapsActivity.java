@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,7 +26,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.maps.android.PolyUtil;
-
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -43,43 +43,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private Marker marc;
 
-
-//    public PolylineOptions polyBiblio;
-//
-//    public PolylineOptions polySecond;
-//
-//    public PolylineOptions polyThird;
-
-
     public Polygon polygonBiblio;
 
-    public Polygon polygonSecond;
+    public Polygon polygonA;
 
-    public Polygon polygonThird;
+    public Polygon polygonM;
 
     public LatLng ln;
 
 
-    public LatLng oneB = new LatLng(3.341661, -76.529788);
-    public LatLng twoB = new LatLng(3.341666, -76.530072);
-    public LatLng threeB = new LatLng(3.341923, -76.530062);
-    public LatLng fourB = new LatLng(3.341902, -76.529783);
-    public LatLng fiveB = new LatLng(3.341650, -76.529783);
+    public LatLng oneB = new LatLng(3.341650, -76.530121);
+    public LatLng twoB = new LatLng(3.341932, -76.530110);
+    public LatLng threeB = new LatLng(3.341923, -76.529812);
+    public LatLng fourB = new LatLng(3.341639, -76.529812);
+   // public LatLng fiveB = new LatLng(3.341650, -76.529783);
 
-    public LatLng oneS = new LatLng(3.342062, -76.530609);
-    public LatLng twoS = new LatLng(3.342175, -76.530620);
-    public LatLng threeS = new LatLng(3.342121, -76.530255);
-    public LatLng fourS = new LatLng(3.342030, -76.530250);
-    public LatLng fiveS = new LatLng(3.342062, -76.530609);
+    public LatLng oneS = new LatLng(3.342125, -76.530372);
+    public LatLng twoS = new LatLng(3.342255, -76.530369);
+    public LatLng threeS = new LatLng(3.342243, -76.530064);
+    public LatLng fourS = new LatLng(3.342123, -76.530068);
+    //public LatLng fiveS = new LatLng(3.342062, -76.530609);
 
     public LatLng oneT = new LatLng(3.342801, -76.530733);
     public LatLng twoT = new LatLng(3.342791, -76.530105);
     public LatLng threeT = new LatLng(3.342496, -76.530138);
     public LatLng fourT = new LatLng(3.342518, -76.530701);
-    public LatLng fiveT  = new LatLng(3.342801, -76.530733);
+    //public LatLng fiveT  = new LatLng(3.342801, -76.530733);
 
     public FloatingActionButton boton_preguntas;
 
+    public  FloatingActionButton boton_canje;
+
+    public FloatingActionButton boton_faciles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,16 +102,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
-        boton_preguntas = findViewById(R.id.btn_preguntas);
-
+        boton_preguntas = findViewById(R.id.btn_preguntasDificles);
+        boton_faciles = findViewById(R.id.btn_preguntasFaciles);
+        boton_canje = findViewById(R.id.btn_canje);
 
         //boton_preguntas.setVisibility(0);
         boton_preguntas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
 
                 iniciarPreguntas();
+            }
+        });
+
+        boton_canje.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iniciarCanje();
             }
         });
 
@@ -129,12 +131,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         inicializarPolys();
 
 
+        boton_preguntas.hide();
+        boton_faciles.hide();
+        boton_canje.hide();
 
         manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, new LocationListener() {
 
             private boolean first=false;
-
-
 
             @Override
             public void onLocationChanged(Location location) {
@@ -147,19 +150,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     actual = new MarkerOptions().position(ln).title("Mi ubicación").icon(BitmapDescriptorFactory.fromResource(R.drawable.manx));
                     marc = mMap.addMarker(actual);
                     //mMap.addMarker(actual);
+
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ln, 18));
                     first=true;
 
 
                     if(PolyUtil.containsLocation(ln, polygonBiblio.getPoints(), true)){
                         Toast.makeText(getApplicationContext(), "Estás dentro del poligono Biblio", Toast.LENGTH_LONG).show();
+                        boton_canje.show();
+
+                    }
+                    else{
+                        boton_canje.hide();
                     }
 
-                    if(PolyUtil.containsLocation(ln, polygonSecond.getPoints(), true)){
-                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Second", Toast.LENGTH_LONG).show();
+
+                    if(PolyUtil.containsLocation(ln, polygonA.getPoints(), true)){
+                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Edificio A", Toast.LENGTH_LONG).show();
+                        boton_faciles.show();
+                    }
+                    else{
+                        boton_faciles.hide();
                     }
 
-                    if(PolyUtil.containsLocation(ln, polygonThird.getPoints(), true)){
-                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Third", Toast.LENGTH_LONG).show();
+                    if(PolyUtil.containsLocation(ln, polygonM.getPoints(), true)){
+                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Edificio M", Toast.LENGTH_LONG).show();
+
+                        boton_preguntas.show();
+                    }
+
+                    else{
+                        boton_preguntas.hide();
                     }
                 }
                 else{
@@ -171,6 +192,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     //mMap.addMarker(actual);
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(ln));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ln, 18));
 
                     Toast.makeText(getApplicationContext(), "Ubicación actual actualizada", Toast.LENGTH_LONG).show();
 
@@ -178,15 +200,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     if(PolyUtil.containsLocation(ln, polygonBiblio.getPoints(), true)){
                         Toast.makeText(getApplicationContext(), "Estás dentro del poligono Biblio", Toast.LENGTH_LONG).show();
+                        boton_canje.show();
+                    }
+                    else{
+                        boton_canje.hide();
                     }
 
-                    if(PolyUtil.containsLocation(ln, polygonSecond.getPoints(), true)){
-                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Second", Toast.LENGTH_LONG).show();
+                    if(PolyUtil.containsLocation(ln, polygonA.getPoints(), true)){
+                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Edificio A", Toast.LENGTH_LONG).show();
+
+                        boton_faciles.show();
+                    }
+                    else{
+                        boton_faciles.hide();
                     }
 
 
-                    if(PolyUtil.containsLocation(ln, polygonThird.getPoints(), true)){
-                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Third ms", Toast.LENGTH_LONG).show();
+                    if(PolyUtil.containsLocation(ln, polygonM.getPoints(), true)){
+                        Toast.makeText(getApplicationContext(), "Estás dentro del poligono Edificio M", Toast.LENGTH_LONG).show();
+                        boton_preguntas.show();
+                    }
+                    else{
+                        boton_preguntas.hide();
                     }
 
                 }
@@ -213,8 +248,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
-
     public void iniciarCanje(){
         Intent i = new Intent(MapsActivity.this, Canje.class);
         startActivity(i);
@@ -228,87 +261,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void inicializarPolys(){
 
-//        polyBiblio = new PolylineOptions();
-//        polySecond = new PolylineOptions();
-//        polyThird = new PolylineOptions();
-
-
         polygonBiblio = mMap.addPolygon(new PolygonOptions()
                 .add(oneB, twoB, threeB, fourB));
         polygonBiblio.setStrokeColor(Color.YELLOW);
 
-
-
-        polygonSecond = mMap.addPolygon(new PolygonOptions()
+        polygonA = mMap.addPolygon(new PolygonOptions()
                 .add(oneS, twoS, threeS, fourS));
-        polygonSecond.setStrokeColor(Color.GREEN);
+        polygonA.setStrokeColor(Color.GREEN);
 
-        polygonThird = mMap.addPolygon(new PolygonOptions()
+        polygonM = mMap.addPolygon(new PolygonOptions()
                 .add(oneT, twoT, threeT, fourT));
-        polygonBiblio.setStrokeColor(Color.RED);
-
-
-
-
-        //boolean inside =
-
-
-//        polyBiblio.add(new LatLng[] {
-//                oneB,
-//                twoB,
-//                threeB,
-//                fourB,
-//                fiveB
-//        });
-//        mMap.addPolyline(polyBiblio);
-//
-//
-//
-//        polySecond.add(new LatLng[] {
-//                oneS,
-//                twoS,
-//                threeS,
-//                fourS,
-//                fiveS
-//        });
-//        mMap.addPolyline(polySecond);
-//
-//
-//
-//        polyThird.add(new LatLng[] {
-//                oneT,
-//                twoT,
-//                threeT,
-//                fourT,
-//                fiveT
-//        });
-//        mMap.addPolyline(polyThird);
-
-
-
+        polygonM.setStrokeColor(Color.RED);
 
     }
 
-
-    boolean enmarcada(double top, double left,
-                      double bottom, double right,
-                      double latitude, double longitude){
-        /* Check latitude bounds first. */
-        if(top >= latitude && latitude >= bottom){
-                /* If your bounding box doesn't wrap
-                   the date line the value
-                   must be between the bounds.
-                   If your bounding box does wrap the
-                   date line it only needs to be
-                   higher than the left bound or
-                   lower than the right bound. */
-            if(left <= right && left <= longitude && longitude <= right){
-                return true;
-            } else if(left > right && (left <= longitude || longitude <= right)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
 }
