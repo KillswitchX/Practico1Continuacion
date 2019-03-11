@@ -215,7 +215,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .add(oneT, twoT, threeT, fourT));
         polygonBiblio.setStrokeColor(Color.GREEN);
 
-        boolean inside =
+        //boolean inside =
 
 
 //        polyBiblio.add(new LatLng[] {
