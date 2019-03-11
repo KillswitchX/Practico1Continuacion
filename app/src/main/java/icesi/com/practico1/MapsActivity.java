@@ -229,7 +229,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         boton_preguntas.show();
                     }
                     else{
+
+
                         boton_preguntas.hide();
+
+
+
                     }
 
                 }
