@@ -115,6 +115,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        boton_faciles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
         boton_canje.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -254,6 +262,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void iniciarPreguntas(){
+        Intent i = new Intent(MapsActivity.this, Preguntas.class);
+        startActivity(i);
+    }
+
+    public void iniciarFaciles(){
         Intent i = new Intent(MapsActivity.this, Preguntas.class);
         startActivity(i);
     }
