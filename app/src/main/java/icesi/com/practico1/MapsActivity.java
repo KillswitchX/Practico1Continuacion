@@ -3,13 +3,14 @@ package icesi.com.practico1;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.model.PolygonOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -41,30 +42,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker marc;
 
 
-    public PolylineOptions polyBiblio;
+//    public PolylineOptions polyBiblio;
+//
+//    public PolylineOptions polySecond;
+//
+//    public PolylineOptions polyThird;
 
-    public PolylineOptions polySecond;
 
-    public PolylineOptions polyThird;
+    public Polygon polygonBiblio;
+
+    public Polygon polygonSecond;
+
+    public Polygon polygonThird;
 
 
-    LatLng oneB = new LatLng(3.341661, -76.529788);
-    LatLng twoB = new LatLng(3.341666, -76.530072);
-    LatLng threeB = new LatLng(3.341923, -76.530062);
-    LatLng fourB = new LatLng(3.341902, -76.529783);
-    LatLng fiveB = new LatLng(3.341650, -76.529783);
+    public LatLng oneB = new LatLng(3.341661, -76.529788);
+    public LatLng twoB = new LatLng(3.341666, -76.530072);
+    public LatLng threeB = new LatLng(3.341923, -76.530062);
+    public LatLng fourB = new LatLng(3.341902, -76.529783);
+    public LatLng fiveB = new LatLng(3.341650, -76.529783);
 
-    LatLng oneS = new LatLng(3.342062, -76.530609);
-    LatLng twoS = new LatLng(3.342175, -76.530620);
-    LatLng threeS = new LatLng(3.342121, -76.530255);
-    LatLng fourS = new LatLng(3.342030, -76.530250);
-    LatLng fiveS = new LatLng(3.342062, -76.530609);
+    public LatLng oneS = new LatLng(3.342062, -76.530609);
+    public LatLng twoS = new LatLng(3.342175, -76.530620);
+    public LatLng threeS = new LatLng(3.342121, -76.530255);
+    public LatLng fourS = new LatLng(3.342030, -76.530250);
+    public LatLng fiveS = new LatLng(3.342062, -76.530609);
 
-    LatLng oneT = new LatLng(3.342801, -76.530733);
-    LatLng twoT = new LatLng(3.342791, -76.530105);
-    LatLng threeT = new LatLng(3.342496, -76.530138);
-    LatLng fourT = new LatLng(3.342518, -76.530701);
-    LatLng fiveT  = new LatLng(3.342801, -76.530733);
+    public LatLng oneT = new LatLng(3.342801, -76.530733);
+    public LatLng twoT = new LatLng(3.342791, -76.530105);
+    public LatLng threeT = new LatLng(3.342496, -76.530138);
+    public LatLng fourT = new LatLng(3.342518, -76.530701);
+    public LatLng fiveT  = new LatLng(3.342801, -76.530733);
 
     public FloatingActionButton boton_preguntas;
 
@@ -188,43 +196,58 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void inicializarPolys(){
 
-        polyBiblio = new PolylineOptions();
-        polySecond = new PolylineOptions();
-        polyThird = new PolylineOptions();
+//        polyBiblio = new PolylineOptions();
+//        polySecond = new PolylineOptions();
+//        polyThird = new PolylineOptions();
+
+
+        polygonBiblio = mMap.addPolygon(new PolygonOptions()
+                .add(oneB, twoB, threeB, fourB));
+        polygonBiblio.setStrokeColor(Color.RED);
 
 
 
+        polygonSecond = mMap.addPolygon(new PolygonOptions()
+                .add(oneS, twoS, threeS, fourS));
+        polygonSecond.setStrokeColor(Color.BLUE);
 
-        polyBiblio.add(new LatLng[] {
-                oneB,
-                twoB,
-                threeB,
-                fourB,
-                fiveB
-        });
-        mMap.addPolyline(polyBiblio);
+        polygonThird = mMap.addPolygon(new PolygonOptions()
+                .add(oneT, twoT, threeT, fourT));
+        polygonBiblio.setStrokeColor(Color.GREEN);
 
-
-
-        polySecond.add(new LatLng[] {
-                oneS,
-                twoS,
-                threeS,
-                fourS,
-                fiveS
-        });
-        mMap.addPolyline(polySecond);
+        boolean inside =
 
 
-
-        polyThird.add(new LatLng[] {
-                oneT,
-                twoT,
-                threeT,
-                fourT,
-                fiveT
-        });
-        mMap.addPolyline(polyThird);
+//        polyBiblio.add(new LatLng[] {
+//                oneB,
+//                twoB,
+//                threeB,
+//                fourB,
+//                fiveB
+//        });
+//        mMap.addPolyline(polyBiblio);
+//
+//
+//
+//        polySecond.add(new LatLng[] {
+//                oneS,
+//                twoS,
+//                threeS,
+//                fourS,
+//                fiveS
+//        });
+//        mMap.addPolyline(polySecond);
+//
+//
+//
+//        polyThird.add(new LatLng[] {
+//                oneT,
+//                twoT,
+//                threeT,
+//                fourT,
+//                fiveT
+//        });
+//        mMap.addPolyline(polyThird);
 
 
 
