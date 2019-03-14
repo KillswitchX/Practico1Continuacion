@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:textColor="#FFF"
-            android:text="Preguntas Fàciles, cada una vale 5 puntos"
+            android:text="Preguntas Dificiles, cada una vale 10 puntos"
             android:gravity="center"
             />
 
@@ -34,7 +34,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:text="5*5"
-            android:id="@+id/et_pregunta"
+            android:id="@+id/et_pregunta_Dificil"
             />
 
 
@@ -71,7 +71,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textSize="22sp"
-                android:id="@+id/rb_opcion1"
+                android:id="@+id/rb_opcion1_Dificil"
                 />
             <RadioButton
                 android:layout_marginTop="8dp"
@@ -81,7 +81,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textSize="22sp"
-                android:id="@+id/rb_opcion2"
+                android:id="@+id/rb_opcion2_Dificil"
                 />
             <RadioButton
                 android:layout_marginTop="8dp"
@@ -91,7 +91,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textSize="22sp"
-                android:id="@+id/rb_opcion3"
+                android:id="@+id/rb_opcion3_Dificil"
                 />
             <RadioButton
                 android:layout_marginTop="8dp"
@@ -101,7 +101,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textSize="22sp"
-                android:id="@+id/rb_opcion4"
+                android:id="@+id/rb_opcion4_Dificil"
                 />
 
 
