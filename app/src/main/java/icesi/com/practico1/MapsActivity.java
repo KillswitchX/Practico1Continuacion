@@ -112,13 +112,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View view) {
 
                 iniciarPreguntas();
+                MapsActivity.this.finish();
             }
         });
 
         boton_faciles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                iniciarFaciles();
+                MapsActivity.this.finish();
             }
         });
 
@@ -127,6 +129,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 iniciarCanje();
+                MapsActivity.this.finish();
             }
         });
 
@@ -140,7 +143,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         boton_preguntas.hide();
-        boton_faciles.hide();
+        //boton_faciles.hide();
         boton_canje.hide();
 
         manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, new LocationListener() {
@@ -175,10 +178,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     if(PolyUtil.containsLocation(ln, polygonA.getPoints(), true)){
                         Toast.makeText(getApplicationContext(), "Estás dentro del poligono Edificio A", Toast.LENGTH_LONG).show();
-                        boton_faciles.show();
+                        //boton_faciles.show();
                     }
                     else{
-                        boton_faciles.hide();
+                        //boton_faciles.hide();
                     }
 
                     if(PolyUtil.containsLocation(ln, polygonM.getPoints(), true)){
@@ -217,10 +220,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if(PolyUtil.containsLocation(ln, polygonA.getPoints(), true)){
                         Toast.makeText(getApplicationContext(), "Estás dentro del poligono Edificio A", Toast.LENGTH_LONG).show();
 
-                        boton_faciles.show();
+                        //boton_faciles.show();
                     }
                     else{
-                        boton_faciles.hide();
+                        //boton_faciles.hide();
                     }
 
 
@@ -272,7 +275,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void iniciarFaciles(){
-        Intent i = new Intent(MapsActivity.this, Preguntas.class);
+        Intent i = new Intent(MapsActivity.this, Faciles.class);
         startActivity(i);
     }
 

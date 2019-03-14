@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
-        app:cardBackgroundColor="#33001a"
+        app:cardBackgroundColor="#000"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -38,23 +38,34 @@
                 android:layout_marginBottom="25dp"
                 android:gravity="center"
                 >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:text="La respuesta es:"
+                    android:textColor="#FFF"
+                    />
 
-                <EditText
-                    android:id="@+id/et_respuesta"
+                <TextView
+                    android:id="@+id/et_indicador"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:textAlignment="center"
                     android:gravity="center"
-                    android:hint="                      Lugar                        "
                     android:textStyle="bold"
                     android:textSize="20dp"
+                    android:textColor="#FFF"
 
                     />
 
                 <Button
-                    android:id="@+id/btn_aceptarDialog"
+                    android:id="@+id/btn_dialog_correcto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -62,7 +73,7 @@
                     android:layout_marginTop="10dp"
                     android:textAlignment="center"
                     android:gravity="center"
-                    android:text="      Aceptar      "
+                    android:text="             Aceptar             "
                     android:textStyle="bold"
                     android:textColor="#FFF"
                     android:textSize="15dp"
