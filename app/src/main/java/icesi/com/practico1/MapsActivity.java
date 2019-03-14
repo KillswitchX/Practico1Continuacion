@@ -158,9 +158,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             puntaje.setText("Puntaje = 0");
         }
 
-        boton_preguntas.hide();
+        //boton_preguntas.hide();
         //boton_faciles.hide();
-        boton_canje.hide();
+        //boton_canje.hide();
 
         manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, new LocationListener() {
 
@@ -184,11 +184,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     if(PolyUtil.containsLocation(ln, polygonBiblio.getPoints(), true)){
                         Toast.makeText(getApplicationContext(), "Estás dentro del poligono Biblio", Toast.LENGTH_LONG).show();
-                        boton_canje.show();
+                        //boton_canje.show();
 
                     }
                     else{
-                        boton_canje.hide();
+                        //boton_canje.hide();
                     }
 
 
@@ -203,11 +203,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if(PolyUtil.containsLocation(ln, polygonM.getPoints(), true)){
                         Toast.makeText(getApplicationContext(), "Estás dentro del poligono Edificio M", Toast.LENGTH_LONG).show();
 
-                        boton_preguntas.show();
+                        //boton_preguntas.show();
                     }
 
                     else{
-                        boton_preguntas.hide();
+                        //boton_preguntas.hide();
                     }
                 }
                 else{
