@@ -35,6 +35,13 @@ public class Faciles extends AppCompatActivity {
 
     public Button boton;
 
+    public Button volver;
+
+    public EditText puntaje;
+
+    public int puntos;
+
+
     public GeneradorPreguntas generador;
 
     public Question question;
@@ -45,11 +52,6 @@ public class Faciles extends AppCompatActivity {
 
     public String respuesta;
 
-    public EditText puntaje;
-
-    public Button volver;
-
-    public int puntos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

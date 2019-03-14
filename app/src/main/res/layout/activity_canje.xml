@@ -169,9 +169,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             >
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Còdigo: "
+            />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Còdigo de canjeo en tienda icesi"
+                android:id="@+id/et_codigoCanjeo"
+                />
 
 
         </LinearLayout>
