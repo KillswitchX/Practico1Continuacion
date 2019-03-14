@@ -71,7 +71,13 @@ public class Faciles extends AppCompatActivity {
 
 
         //------------------------
-        puntos=0;
+        if(getIntent()==null){
+            puntos=0;
+        }
+        else{
+            puntos = getIntent().getIntExtra("puntos", 0);
+        }
+        puntaje.setText("Puntaje = " + puntos);
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +104,7 @@ public class Faciles extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Faciles.this, MapsActivity.class);
+                i.putExtra("puntos", puntos);
                 startActivity(i);
                 Faciles.this.finish();
             }

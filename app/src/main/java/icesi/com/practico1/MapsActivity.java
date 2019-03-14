@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -50,6 +51,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public Polygon polygonM;
 
     public LatLng ln;
+
+    public EditText puntaje;
+
+    public int puntos;
 
 
     public LatLng oneB = new LatLng(3.341650, -76.530121);
@@ -105,6 +110,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         boton_preguntas = findViewById(R.id.btn_preguntasDificles);
         boton_faciles = findViewById(R.id.btn_preguntasFaciles);
         boton_canje = findViewById(R.id.btn_canje);
+        puntaje = findViewById(R.id.puntaje_Global);
 
         //boton_preguntas.setVisibility(0);
         boton_preguntas.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +147,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         inicializarPolys();
 
+        if(getIntent() !=null){
+            puntos = getIntent().getIntExtra("puntos",0);
+            puntaje.setText("Puntaje ="+puntos);
+
+        }
+        else{
+            puntos = 0;
+
+            puntaje.setText("Puntaje = 0");
+        }
 
         boton_preguntas.hide();
         //boton_faciles.hide();
@@ -266,16 +282,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void iniciarCanje(){
         Intent i = new Intent(MapsActivity.this, Canje.class);
+        i.putExtra("puntos", puntos);
         startActivity(i);
     }
 
     public void iniciarPreguntas(){
         Intent i = new Intent(MapsActivity.this, Preguntas.class);
+        i.putExtra("puntos", puntos);
         startActivity(i);
     }
 
     public void iniciarFaciles(){
         Intent i = new Intent(MapsActivity.this, Faciles.class);
+        i.putExtra("puntos", puntos);
         startActivity(i);
     }
 

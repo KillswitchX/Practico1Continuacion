@@ -6,6 +6,7 @@
 
 
 
+
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,6 +15,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MapsActivity" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="#000"
+        android:backgroundTint="#000"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#000"
+            android:minHeight="60dp"
+            android:layout_gravity="center"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="Puntaje ="
+                android:textSize="35sp"
+                android:id="@+id/puntaje_Global"
+                />
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
 
 
     <LinearLayout
